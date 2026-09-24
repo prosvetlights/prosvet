@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PROSVET — освещение и электрика оптом в Алматы | LED со склада</title>
   <meta name="description"
-    content="Оптовые поставки LED-освещения и электромонтажных изделий в Алматы. Более 400 позиций на складе, отгрузка в день заказа. Работаем с ЖК, БЦ, ТРЦ, школами и по госзакупкам.">
-  <link rel="canonical" href="https://prosvetlight.kz/">
+    content="Оптовые поставки LED-освещения и электромонтажных изделий в Алматы. 620 позиций на складе, отгрузка в день заказа. Работаем с ЖК, БЦ, ТРЦ, школами и по госзакупкам.">
+  <link rel="canonical" href="https://www.prosvetlights.kz/">
   <meta name="theme-color" content="#0B0E13">
   <meta name="format-detection" content="telephone=no">
   <meta property="og:type" content="website">
@@ -15,9 +15,9 @@
   <meta property="og:locale" content="ru_KZ">
   <meta property="og:title" content="PROSVET — освещение и электрика оптом в Алматы">
   <meta property="og:description"
-    content="Более 400 позиций LED-освещения на складе в Алматы. Отгрузка в день заказа, работа с крупными объектами и госзакупками.">
-  <meta property="og:url" content="https://prosvetlight.kz/">
-  <meta property="og:image" content="https://prosvetlight.kz/images/hero-sklad.jpg">
+    content="620 позиций LED-освещения на складе в Алматы. Отгрузка в день заказа, работа с крупными объектами и госзакупками.">
+  <meta property="og:url" content="https://www.prosvetlights.kz/">
+  <meta property="og:image" content="https://www.prosvetlights.kz/images/hero-sklad.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2220,6 +2220,59 @@
       }
     }
 
+    /* ---------- плавающая кнопка корзины (видна, когда в корзине что-то есть) ---------- */
+    .cart-fab {
+      position: fixed;
+      right: 88px;
+      bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+      z-index: 50;
+      height: 56px;
+      padding: 0 18px 0 16px;
+      border-radius: 28px;
+      background: var(--blue);
+      color: #fff;
+      border: 0;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      gap: 8px;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, .28);
+    }
+
+    .cart-fab.on {
+      display: flex;
+    }
+
+    .cart-fab:active {
+      transform: scale(.97);
+    }
+
+    .cart-fab svg {
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke: #fff;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .cart-fab b {
+      background: #fff;
+      color: var(--blue);
+      border-radius: 10px;
+      min-width: 20px;
+      height: 20px;
+      padding: 0 6px;
+      font-size: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     /* ---------- плавающая кнопка WhatsApp ---------- */
     .wa-fab {
       position: fixed;
@@ -2490,6 +2543,301 @@
         transition: none;
       }
     }
+
+    /* ================= КОРЗИНА ================= */
+    .calc-add {
+      width: 100%;
+      margin-top: 12px;
+      padding: 12px 16px;
+      font: inherit;
+      font-size: 14.5px;
+      font-weight: 600;
+      color: #fff;
+      background: var(--blue);
+      border: 1px solid var(--blue);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 150ms var(--ease), transform 130ms var(--spring);
+    }
+
+    .calc-add:hover {
+      background: #1257C8;
+    }
+
+    .calc-add:active {
+      transform: scale(.98);
+    }
+
+    .calc-add.done {
+      background: var(--ink);
+      border-color: var(--ink);
+    }
+
+    .card.found {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px var(--blue-soft);
+    }
+
+    .cart-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      background: rgba(11, 14, 19, .45);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 200ms var(--ease);
+    }
+
+    .cart-overlay.on {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .cart-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 61;
+      width: 420px;
+      max-width: 100%;
+      background: #fff;
+      color: var(--ink);
+      display: flex;
+      flex-direction: column;
+      box-shadow: -12px 0 32px rgba(11, 14, 19, .18);
+      transform: translateX(104%);
+      transition: transform 260ms var(--ease);
+      visibility: hidden;
+    }
+
+    .cart-panel.on {
+      transform: none;
+      visibility: visible;
+    }
+
+    .cp-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .cp-head h3 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .cp-close {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      cursor: pointer;
+      font-size: 20px;
+      line-height: 1;
+      color: var(--ink);
+    }
+
+    .cp-close:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+
+    .cp-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 6px 20px;
+    }
+
+    .cp-empty {
+      padding: 34px 0;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .cp-item {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .cp-item img {
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+    }
+
+    .cp-name {
+      margin: 0 0 4px;
+      font-size: 13.5px;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .cp-price {
+      margin: 0 0 8px;
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+
+    .cp-price b {
+      color: var(--blue-deep);
+      font-weight: 600;
+    }
+
+    .cp-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .cp-qty {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .cp-qty button {
+      width: 32px;
+      height: 32px;
+      border: 0;
+      background: var(--paper);
+      cursor: pointer;
+      font-size: 17px;
+      color: var(--ink);
+    }
+
+    .cp-qty button:hover {
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    .cp-qty input {
+      width: 62px;
+      height: 32px;
+      border: 0;
+      border-left: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      text-align: center;
+      font: inherit;
+      font-size: 14px;
+      -moz-appearance: textfield;
+    }
+
+    .cp-qty input::-webkit-outer-spin-button,
+    .cp-qty input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .cp-sum {
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .cp-del {
+      margin-top: 6px;
+      border: 0;
+      background: none;
+      padding: 0;
+      font: inherit;
+      font-size: 12px;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .cp-del:hover {
+      color: var(--alert);
+    }
+
+    .cp-foot {
+      padding: 16px 20px calc(18px + env(safe-area-inset-bottom, 0px));
+      border-top: 1px solid var(--line);
+      background: var(--paper);
+    }
+
+    .cp-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+
+    .cp-total span {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .cp-total b {
+      font-size: 22px;
+    }
+
+    .cp-note {
+      margin: 0 0 14px;
+      font-size: 11.5px;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    .cp-order {
+      width: 100%;
+      padding: 14px 16px;
+      font: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      background: #1FA855;
+      border: 0;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: filter 150ms var(--ease);
+    }
+
+    .cp-order:hover {
+      filter: brightness(1.07);
+    }
+
+    .cp-order:disabled {
+      background: #B9C1CC;
+      cursor: not-allowed;
+      filter: none;
+    }
+
+    .cp-clear {
+      width: 100%;
+      margin-top: 8px;
+      padding: 8px;
+      border: 0;
+      background: none;
+      font: inherit;
+      font-size: 12.5px;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .cp-clear:hover {
+      color: var(--alert);
+    }
+
+    @media (max-width:680px) {
+      .cart-panel {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 
@@ -2505,13 +2853,14 @@
   <header>
     <div class="wrap">
       <div class="logo">PRO<em>SVET</em></div>
-      <form class="search" onsubmit="return false">
+      <form class="search" id="searchForm" onsubmit="return false">
         <input type="search" placeholder="Артикул или название — например, панель 595*595">
         <button type="submit">Найти</button>
       </form>
       <div class="phones"><a href="tel:+77753488673">+7 775 348 86 73</a><small>Азамат — опт</small></div>
       <div class="phones"><a href="tel:+77477222835">+7 747 722 28 35</a><small>Думан — розница</small></div>
-      <button class="cart">Корзина <span class="count" id="count">0</span></button>
+      <button class="cart" id="cartBtn" type="button" aria-controls="cartPanel" aria-expanded="false">Корзина <span
+          class="count" id="count">0</span></button>
     </div>
   </header>
 
@@ -2520,6 +2869,7 @@
       <a href="#about">О компании</a>
       <a href="#catalog">Каталог</a>
       <a href="#hits">Товары</a>
+      <a href="#uslugi">Монтаж</a>
       <a href="#objects">Наши работы</a>
       <a href="#price">Заявка</a>
       <a href="#contacts">Контакты</a>
@@ -2587,6 +2937,7 @@
           <div class="sum"><b id="sum">294 000 ₸</b><span>сумма заказа</span></div>
         </div>
         <p class="saving" id="saving"></p>
+        <button class="calc-add" id="calcAdd" type="button">Добавить в корзину</button>
         <p class="calc-note">Цена за штуку — из прайса. Условия по крупным партиям обсуждаются с менеджером.</p>
       </div>
     </div>
@@ -2603,7 +2954,7 @@
         <p>Поставляем свет на спортивные объекты, бизнес-центры и школы, работаем
           по государственным закупкам, отгружаем партии монтажникам и магазинам
           электрики на перепродажу.</p>
-        <a class="more" href="#">Подробнее о компании</a>
+        <a class="more" href="#objects">Смотреть наши объекты</a>
       </div>
       <div class="about-video" id="aboutVideo">
         <video id="promoVideo" poster="images/video-poster.jpg" preload="none" playsinline controlslist="nodownload">
@@ -2684,7 +3035,7 @@
   <section id="catalog">
     <div class="wrap">
       <div class="sec-head">
-        <h2>Каталог</h2><a href="#">Все 620 позиций</a>
+        <h2>Каталог</h2><a href="PROSVET_katalog.pdf" target="_blank" rel="noopener">Все 620 позиций (PDF)</a>
       </div>
 
       <div class="cat-pdf">
@@ -2697,7 +3048,9 @@
       </div>
 
       <div class="cats">
-        <a class="cat wide reveal" style="--i:0" href="#">
+        <a class="cat wide reveal" style="--i:0"
+          href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%C2%AB%D0%9E%D1%81%D0%B2%D0%B5%D1%89%D0%B5%D0%BD%D0%B8%D0%B5%C2%BB.%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%BF%D1%80%D0%B0%D0%B9%D1%81%20%D0%B8%20%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B5."
+          target="_blank" rel="noopener noreferrer">
           <div class="ph cat-osv"><img src="images/cat/osveschenie.jpg" alt="Освещение" loading="lazy"><span
               class="note">фото 16:9 · освещение</span></div>
           <div class="txt">
@@ -2710,7 +3063,9 @@
             </div>
           </div>
         </a>
-        <a class="cat reveal" style="--i:1" href="#">
+        <a class="cat reveal" style="--i:1"
+          href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%C2%AB%D0%AD%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%BE%D0%BD%D0%B5%D0%BD%D1%82%D1%8B%C2%BB.%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%BF%D1%80%D0%B0%D0%B9%D1%81%20%D0%B8%20%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B5."
+          target="_blank" rel="noopener noreferrer">
           <div class="ph cat-komp"><img src="images/cat/komponenty.jpg" alt="Электрические компоненты"
               loading="lazy"><span class="note">фото 16:9 · компоненты</span></div>
           <div class="txt">
@@ -2718,7 +3073,9 @@
             <p>датчики движения, фотореле, модули</p>
           </div>
         </a>
-        <a class="cat reveal" style="--i:2" href="#">
+        <a class="cat reveal" style="--i:2"
+          href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%C2%AB%D0%AD%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D0%B0%D0%BA%D1%81%D0%B5%D1%81%D1%81%D1%83%D0%B0%D1%80%D1%8B%C2%BB.%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%BF%D1%80%D0%B0%D0%B9%D1%81%20%D0%B8%20%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B5."
+          target="_blank" rel="noopener noreferrer">
           <div class="ph cat-aks"><img src="images/cat/aksessuary.jpg" alt="Электрические аксессуары"
               loading="lazy"><span class="note">фото 16:9 · аксессуары</span></div>
           <div class="txt">
@@ -2726,7 +3083,9 @@
             <p>розетки, выключатели, патроны</p>
           </div>
         </a>
-        <a class="cat reveal" style="--i:3" href="#">
+        <a class="cat reveal" style="--i:3"
+          href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%C2%AB%D0%A0%D0%B0%D1%81%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5%20%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B9%D1%81%D1%82%D0%B2%D0%B0%C2%BB.%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%BF%D1%80%D0%B0%D0%B9%D1%81%20%D0%B8%20%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B5."
+          target="_blank" rel="noopener noreferrer">
           <div class="ph cat-rasp"><img src="images/cat/raspred.jpg" alt="Распределительные устройства"
               loading="lazy"><span class="note">фото 16:9 · распредустройства</span></div>
           <div class="txt">
@@ -2734,7 +3093,9 @@
             <p>автоматические выключатели</p>
           </div>
         </a>
-        <a class="cat reveal" style="--i:4" href="#">
+        <a class="cat reveal" style="--i:4"
+          href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%C2%AB%D0%9C%D0%BE%D0%BD%D1%82%D0%B0%D0%B6%D0%BD%D1%8B%D0%B5%20%D0%B8%D0%B7%D0%B4%D0%B5%D0%BB%D0%B8%D1%8F%C2%BB.%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%BF%D1%80%D0%B0%D0%B9%D1%81%20%D0%B8%20%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B5."
+          target="_blank" rel="noopener noreferrer">
           <div class="ph cat-mont"><img src="images/cat/montazh.jpg" alt="Монтажные изделия" loading="lazy"><span
               class="note">фото 16:9 · монтажные изделия</span></div>
           <div class="txt">
@@ -2750,14 +3111,14 @@
   <section id="hits" style="padding-top:0;">
     <div class="wrap">
       <div class="sec-head">
-        <h2>Часто заказывают</h2><a href="#">Смотреть все светильники</a>
+        <h2>Часто заказывают</h2><a href="PROSVET_katalog.pdf" target="_blank" rel="noopener">Весь каталог (PDF)</a>
       </div>
       <div class="grid" id="grid"></div>
     </div>
   </section>
 
   <!-- ============ КАК ЗАКАЗАТЬ ============ -->
-  <div class="how">
+  <div class="how" id="order">
     <section>
       <div class="wrap">
         <div class="sec-head" style="margin-bottom:4px;">
@@ -2792,11 +3153,86 @@
     </section>
   </div>
 
+  <!-- ============ УСЛУГИ: МОНТАЖ И ЭЛЕКТРОСНАБЖЕНИЕ ============ -->
+  <div class="paths" id="uslugi">
+    <div class="wrap">
+      <section style="padding-bottom:34px;">
+        <div class="sec-head" style="margin-bottom:6px;">
+          <h2>Монтаж и электроснабжение под ключ</h2>
+        </div>
+        <p style="margin:0 0 22px;font-size:14px;color:var(--muted);">Кроме поставки света делаем монтаж освещения и
+          полное электроснабжение объектов — для ЖК, больниц, школ и частных домов. Смету считает менеджер в WhatsApp.
+        </p>
+
+        <div class="grid3">
+          <div class="path a reveal" style="--i:0">
+            <h3>Монтаж освещения</h3>
+            <p>Внутреннее, уличное и архитектурное освещение для жилых комплексов, школ, больниц и частных домов.</p>
+            <ul>
+              <li>Светильники — со своего склада в Алматы</li>
+              <li>Монтаж под ключ</li>
+              <li>ШУНО — шкафы управления наружным освещением</li>
+            </ul>
+            <div class="acts"><a
+                href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9D%D1%83%D0%B6%D0%B5%D0%BD%20%D1%80%D0%B0%D1%81%D1%87%D1%91%D1%82%20%D0%BC%D0%BE%D0%BD%D1%82%D0%B0%D0%B6%D0%B0%20%D0%BE%D1%81%D0%B2%D0%B5%D1%89%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%B4%D0%BB%D1%8F%20%D0%BE%D0%B1%D1%8A%D0%B5%D0%BA%D1%82%D0%B0."
+                target="_blank" rel="noopener noreferrer">Посчитать в WhatsApp</a><a class="sec"
+                href="tel:+77753488673">Позвонить</a>
+            </div>
+          </div>
+
+          <div class="path b reveal" style="--i:1">
+            <h3>Электроснабжение объектов</h3>
+            <p>Полное электроснабжение объекта — от подстанции до щита.</p>
+            <ul>
+              <li>ТП и трансформаторы</li>
+              <li>Электрощиты и ШУНО</li>
+              <li>Кабель и шинопровод</li>
+            </ul>
+            <div class="acts"><a
+                href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9D%D1%83%D0%B6%D0%B5%D0%BD%20%D1%80%D0%B0%D1%81%D1%87%D1%91%D1%82%20%D1%8D%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D1%81%D0%BD%D0%B0%D0%B1%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%BE%D0%B1%D1%8A%D0%B5%D0%BA%D1%82%D0%B0%20%28%D0%A2%D0%9F%2C%20%D1%89%D0%B8%D1%82%D1%8B%2C%20%D0%BA%D0%B0%D0%B1%D0%B5%D0%BB%D1%8C%29."
+                target="_blank" rel="noopener noreferrer">Посчитать в WhatsApp</a><a class="sec"
+                href="tel:+77753488673">Позвонить</a></div>
+          </div>
+
+          <div class="path d reveal" style="--i:2">
+            <h3>Проектирование</h3>
+            <p>Проект электроснабжения и освещения для вашего объекта.</p>
+            <ul>
+              <li>Проект электроснабжения</li>
+              <li>Проект освещения</li>
+              <li>Для ЖК, школ, больниц и частных домов</li>
+            </ul>
+            <div class="acts"><a
+                href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9D%D1%83%D0%B6%D0%B5%D0%BD%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D1%8D%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D1%81%D0%BD%D0%B0%D0%B1%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F/%D0%BE%D1%81%D0%B2%D0%B5%D1%89%D0%B5%D0%BD%D0%B8%D1%8F."
+                target="_blank" rel="noopener noreferrer">Обсудить в WhatsApp</a></div>
+          </div>
+
+          <div class="path c reveal" style="--i:3">
+            <h3>Как посчитать ваш объект</h3>
+            <p>Напишите менеджеру в WhatsApp: что за объект, где он находится и что нужно сделать. Менеджер уточнит
+              детали
+              и пришлёт смету.</p>
+            <ul>
+              <li>Пн–Пт 08:00–17:00</li>
+              <li>Азамат, +7 775 348 86 73</li>
+            </ul>
+            <div class="acts"><a
+                href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9D%D1%83%D0%B6%D0%BD%D0%B0%20%D1%81%D0%BC%D0%B5%D1%82%D0%B0%20%D0%BD%D0%B0%20%D0%BE%D0%B1%D1%8A%D0%B5%D0%BA%D1%82."
+                target="_blank" rel="noopener noreferrer">Написать в WhatsApp</a><a class="sec"
+                href="tel:+77753488673">Позвонить</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
   <!-- ============ ОБЪЕКТЫ ============ -->
   <section id="objects" style="padding-top:0;">
     <div class="wrap">
       <div class="sec-head">
-        <h2>Наши объекты</h2><a href="#">Все объекты</a>
+        <h2>Наши объекты</h2><a href="https://www.instagram.com/prosvet_lights/" target="_blank"
+          rel="noopener noreferrer">Все объекты в Instagram</a>
       </div>
       <div class="objects">
         <article class="obj featured reveal" style="--i:0">
@@ -2915,21 +3351,36 @@
         <div>
           <h4>Каталог</h4>
           <ul>
-            <li><a href="#">Освещение</a></li>
-            <li><a href="#">Электрические компоненты</a></li>
-            <li><a href="#">Электрические аксессуары</a></li>
-            <li><a href="#">Распределительные устройства</a></li>
-            <li><a href="#">Монтажные изделия</a></li>
+            <li><a
+                href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%C2%AB%D0%9E%D1%81%D0%B2%D0%B5%D1%89%D0%B5%D0%BD%D0%B8%D0%B5%C2%BB.%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%BF%D1%80%D0%B0%D0%B9%D1%81%20%D0%B8%20%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B5."
+                target="_blank" rel="noopener noreferrer">Освещение</a></li>
+            <li><a
+                href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%C2%AB%D0%AD%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%BE%D0%BD%D0%B5%D0%BD%D1%82%D1%8B%C2%BB.%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%BF%D1%80%D0%B0%D0%B9%D1%81%20%D0%B8%20%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B5."
+                target="_blank" rel="noopener noreferrer">Электрические компоненты</a></li>
+            <li><a
+                href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%C2%AB%D0%AD%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D0%B0%D0%BA%D1%81%D0%B5%D1%81%D1%81%D1%83%D0%B0%D1%80%D1%8B%C2%BB.%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%BF%D1%80%D0%B0%D0%B9%D1%81%20%D0%B8%20%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B5."
+                target="_blank" rel="noopener noreferrer">Электрические аксессуары</a></li>
+            <li><a
+                href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%C2%AB%D0%A0%D0%B0%D1%81%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5%20%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B9%D1%81%D1%82%D0%B2%D0%B0%C2%BB.%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%BF%D1%80%D0%B0%D0%B9%D1%81%20%D0%B8%20%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B5."
+                target="_blank" rel="noopener noreferrer">Распределительные устройства</a></li>
+            <li><a
+                href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%C2%AB%D0%9C%D0%BE%D0%BD%D1%82%D0%B0%D0%B6%D0%BD%D1%8B%D0%B5%20%D0%B8%D0%B7%D0%B4%D0%B5%D0%BB%D0%B8%D1%8F%C2%BB.%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%BF%D1%80%D0%B0%D0%B9%D1%81%20%D0%B8%20%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B5."
+                target="_blank" rel="noopener noreferrer">Монтажные изделия</a></li>
           </ul>
         </div>
         <div>
           <h4>Покупателю</h4>
           <ul>
-            <li><a href="#">О компании</a></li>
-            <li><a href="#">Доставка и оплата</a></li>
-            <li><a href="#">Гарантия до 6 лет</a></li>
-            <li><a href="#">Реквизиты для юрлиц</a></li>
-            <li><a href="#">Instagram</a></li>
+            <li><a href="#about">О компании</a></li>
+            <li><a href="#order">Доставка и оплата</a></li>
+            <li><a
+                href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%92%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%D0%BF%D0%BE%20%D0%B3%D0%B0%D1%80%D0%B0%D0%BD%D1%82%D0%B8%D0%B8%20%D0%BD%D0%B0%20%D1%82%D0%BE%D0%B2%D0%B0%D1%80."
+                target="_blank" rel="noopener noreferrer">Гарантия до 6 лет</a></li>
+            <li><a
+                href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D1%80%D0%B5%D0%BA%D0%B2%D0%B8%D0%B7%D0%B8%D1%82%D1%8B%20%D0%B8%20%D1%81%D1%87%D1%91%D1%82%20%D0%B4%D0%BB%D1%8F%20%D1%8E%D1%80%D0%BB%D0%B8%D1%86%D0%B0."
+                target="_blank" rel="noopener noreferrer">Реквизиты для юрлиц</a></li>
+            <li><a href="https://www.instagram.com/prosvet_lights/" target="_blank"
+                rel="noopener noreferrer">Instagram</a></li>
           </ul>
         </div>
         <div>
@@ -2953,10 +3404,32 @@
       </div>
       <div class="fbottom">
         <span>PROSVET, 2026. Цены на сайте не являются публичной офертой.</span>
-        <span>prosvetlight.kz</span>
+        <span>prosvetlights.kz</span>
       </div>
     </div>
   </footer>
+
+  <button class="cart-fab" id="cartFab" type="button" aria-label="Открыть корзину"><svg viewBox="0 0 24 24"
+      aria-hidden="true">
+      <path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L20 8H6.2" />
+      <circle cx="9" cy="20" r="1.3" />
+      <circle cx="17" cy="20" r="1.3" />
+    </svg>Корзина <b id="cartFabCount">0</b></button>
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-panel" id="cartPanel" role="dialog" aria-modal="true" aria-label="Корзина" aria-hidden="true">
+    <div class="cp-head">
+      <h3>Корзина</h3>
+      <button class="cp-close" id="cartClose" type="button" aria-label="Закрыть корзину">×</button>
+    </div>
+    <div class="cp-list" id="cartList"></div>
+    <div class="cp-foot">
+      <div class="cp-total"><span>Итого</span><b id="cartTotal">0 ₸</b></div>
+      <p class="cp-note">Оптовая цена ставится сама, когда количество доходит до оптового порога. Наличие и итоговую
+        сумму подтвердит менеджер в WhatsApp.</p>
+      <button class="cp-order" id="cartOrder" type="button">Оформить заказ в WhatsApp</button>
+      <button class="cp-clear" id="cartClear" type="button">Очистить корзину</button>
+    </div>
+  </aside>
 
   <script>
     /* ---------- видео о компании ---------- */
@@ -3103,7 +3576,7 @@
     })();
 
     /* ---------- калькулятор партии ---------- */
-    /* цены, оптовые пороги и фото — из выгрузки Satu.kz (реальные данные компании) */
+    /* цены, оптовые пороги и фото — из прайса компании */
     const CALC_PRODUCTS = [
       { sku: '0034', name: 'Светодиодная панель 48W 595х595 6500K IP40 Призма PROSVET', price: 3680, opt: 3000, optMin: 170, img: 'https://images.satu.kz/232594199_svetodiodnaya-panel-48w.jpg' },
       { sku: '0079', name: 'LED прожектор 100W PROSVET IP65', price: 4440, opt: 3800, optMin: 140, img: 'https://images.satu.kz/232452538_led-prozhektor-100w.jpg' },
@@ -3196,7 +3669,7 @@
       <h3 class="name">${p.name}</h3>
       <p class="price">${fmt(p.price)} ₸</p>
       <p class="bulk">${(p.opt && p.optMin) ? 'от ' + p.optMin + ' шт — ' + fmt(p.opt) + ' ₸' : ''}</p>
-      <button class="add"${p.out ? ' disabled' : ''}>${p.out ? 'Нет в наличии' : 'В корзину'}</button>
+      <button class="add" data-sku="${p.sku}"${p.out ? ' disabled' : ''}>${p.out ? 'Нет в наличии' : 'В корзину'}</button>
     </div>
   </article>
 `).join('');
@@ -3209,15 +3682,149 @@
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
     /* ---------- корзина ---------- */
+    const WA_ORDER = '77753488673';                   // заказы из корзины — Азамату (опт)
     const countEl = document.getElementById('count');
-    let count = 0;
+    const cartBtn = document.getElementById('cartBtn'), cartPanel = document.getElementById('cartPanel');
+    const cartOverlay = document.getElementById('cartOverlay'), cartList = document.getElementById('cartList');
+    const cartTotal = document.getElementById('cartTotal'), cartOrder = document.getElementById('cartOrder');
+    const CATALOG = {};
+    [...CALC_PRODUCTS, ...PRODUCTS].forEach(p => { CATALOG[p.sku] = p; });
+    let cart = {};
+    try { cart = JSON.parse(localStorage.getItem('prosvet_cart') || '{}') || {}; } catch (e) { cart = {}; }
+    Object.keys(cart).forEach(k => { if (!CATALOG[k] || !(cart[k] > 0)) delete cart[k]; });
+    const saveCart = () => { try { localStorage.setItem('prosvet_cart', JSON.stringify(cart)); } catch (e) { } };
+    const unitPrice = (p, n) => (p.opt && p.optMin && n >= p.optMin) ? p.opt : p.price;
+    const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+    function cartTotals() {
+      let total = 0;
+      Object.keys(cart).forEach(k => { total += unitPrice(CATALOG[k], cart[k]) * cart[k]; });
+      return total;
+    }
+    const cartFab = document.getElementById('cartFab'), cartFabCount = document.getElementById('cartFabCount');
+    function updateBadge(pop) {
+      const n = Object.keys(cart).length;
+      countEl.textContent = n; cartFabCount.textContent = n; cartFab.classList.toggle('on', n > 0);
+      if (pop) { countEl.classList.add('pop'); setTimeout(() => countEl.classList.remove('pop'), 190); }
+    }
+    function renderCart() {
+      const keys = Object.keys(cart);
+      if (!keys.length) {
+        cartList.innerHTML = '<p class="cp-empty">Корзина пуста. Добавьте товары из раздела «Часто заказывают» '
+          + 'или посчитайте партию в калькуляторе вверху страницы.</p>';
+      } else {
+        cartList.innerHTML = keys.map(k => {
+          const p = CATALOG[k], n = cart[k], price = unitPrice(p, n), wholesale = price !== p.price;
+          const hint = wholesale ? '<b>оптовая цена</b>'
+            : (p.opt && p.optMin ? 'от ' + fmt(p.optMin) + ' шт — ' + fmt(p.opt) + ' ₸' : 'розничная цена');
+          return `<div class="cp-item" data-sku="${esc(k)}">
+            <img src="${esc(p.img)}" alt="" loading="lazy">
+            <div>
+              <p class="cp-name">${esc(p.name)}</p>
+              <p class="cp-price">${fmt(price)} ₸/шт · ${hint}</p>
+              <div class="cp-row">
+                <div class="cp-qty">
+                  <button type="button" data-act="dec" aria-label="Меньше">−</button>
+                  <input type="number" min="1" step="1" inputmode="numeric" value="${n}" aria-label="Количество">
+                  <button type="button" data-act="inc" aria-label="Больше">+</button>
+                </div>
+                <span class="cp-sum">${fmt(price * n)} ₸</span>
+              </div>
+              <button class="cp-del" type="button" data-act="del">Удалить</button>
+            </div>
+          </div>`;
+        }).join('');
+      }
+      cartTotal.textContent = fmt(cartTotals()) + ' ₸';
+      cartOrder.disabled = !keys.length;
+      updateBadge(false);
+    }
+    function setQty(sku, n) {
+      n = Math.floor(+n);
+      if (!(n > 0)) delete cart[sku]; else cart[sku] = Math.min(n, 999999);
+      saveCart(); renderCart();
+    }
+    function addToCart(sku, n) {
+      if (!CATALOG[sku]) return;
+      cart[sku] = (cart[sku] || 0) + n;
+      saveCart(); renderCart(); updateBadge(true);
+    }
+    function openCart(open) {
+      cartPanel.classList.toggle('on', open); cartOverlay.classList.toggle('on', open);
+      cartPanel.setAttribute('aria-hidden', open ? 'false' : 'true');
+      cartBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if (open) document.getElementById('cartClose').focus();
+    }
+
     grid.addEventListener('click', (e) => {
       const btn = e.target.closest('.add');
       if (!btn || btn.disabled || btn.classList.contains('added')) return;
+      addToCart(btn.dataset.sku, 1);
       btn.classList.add('added'); btn.textContent = 'Добавлено';
-      count += 1; countEl.textContent = count;
-      countEl.classList.add('pop'); setTimeout(() => countEl.classList.remove('pop'), 190);
       setTimeout(() => { btn.classList.remove('added'); btn.textContent = 'В корзину'; }, 1500);
+    });
+    const calcAdd = document.getElementById('calcAdd');
+    calcAdd.addEventListener('click', () => {
+      addToCart(current.sku, Math.max(1, +qty.value));
+      calcAdd.classList.add('done'); calcAdd.textContent = 'Добавлено: ' + fmt(+qty.value) + ' шт';
+      setTimeout(() => { calcAdd.classList.remove('done'); calcAdd.textContent = 'Добавить в корзину'; }, 1600);
+      openCart(true);
+    });
+    cartBtn.addEventListener('click', () => openCart(true));
+    cartFab.addEventListener('click', () => openCart(true));
+    cartOverlay.addEventListener('click', () => openCart(false));
+    document.getElementById('cartClose').addEventListener('click', () => openCart(false));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && cartPanel.classList.contains('on')) openCart(false); });
+    cartList.addEventListener('click', (e) => {
+      const b = e.target.closest('button[data-act]'); if (!b) return;
+      const sku = b.closest('.cp-item').dataset.sku;
+      if (b.dataset.act === 'inc') setQty(sku, cart[sku] + 1);
+      if (b.dataset.act === 'dec') setQty(sku, cart[sku] - 1);
+      if (b.dataset.act === 'del') setQty(sku, 0);
+    });
+    cartList.addEventListener('change', (e) => {
+      if (e.target.matches('.cp-qty input')) setQty(e.target.closest('.cp-item').dataset.sku, e.target.value);
+    });
+    document.getElementById('cartClear').addEventListener('click', () => { cart = {}; saveCart(); renderCart(); });
+    cartOrder.addEventListener('click', () => {
+      const keys = Object.keys(cart); if (!keys.length) return;
+      const lines = keys.map((k, i) => {
+        const p = CATALOG[k], n = cart[k], price = unitPrice(p, n);
+        return (i + 1) + '. ' + p.name + ' (арт. ' + p.sku + ') — ' + fmt(n) + ' шт × ' + fmt(price) + ' ₸ = ' + fmt(price * n) + ' ₸';
+      });
+      const text = 'Здравствуйте! Хочу оформить заказ с сайта:\n' + lines.join('\n')
+        + '\nИтого: ' + fmt(cartTotals()) + ' ₸\nПодтвердите, пожалуйста, наличие и сумму.';
+      const url = 'https://wa.me/' + WA_ORDER + '?text=' + encodeURIComponent(text);
+      const win = window.open(url, '_blank'); if (win) { try { win.opener = null; } catch (e) { } }
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'cart_order', items: keys.length, value: cartTotals() });
+      if (typeof gtag === 'function') gtag('event', 'conversion', { send_to: 'AW-18274372715/RFY8CJ_E7sUcEOuY84lE' });
+      if (!win) setTimeout(() => { window.location.href = url; }, 300);
+    });
+    renderCart();
+
+    /* ---------- поиск ---------- */
+    document.getElementById('searchForm').addEventListener('submit', () => {
+      const input = document.querySelector('#searchForm input');
+      const q = input.value.trim();
+      if (!q) { input.focus(); return; }
+      const words = q.toLowerCase().replace(/[*х×x]/g, ' ').split(/\s+/).filter(Boolean);
+      const cards = [...grid.querySelectorAll('.card')];
+      const hits = PRODUCTS.map((p, i) => ({ p, i })).filter(({ p }) => {
+        const hay = (p.name + ' ' + p.sku).toLowerCase().replace(/[*х×x]/g, ' ');
+        return words.every(w => hay.includes(w));
+      });
+      if (hits.length) {
+        cards.forEach(c => c.classList.remove('found'));
+        hits.forEach(({ i }) => cards[i] && cards[i].classList.add('found'));
+        document.getElementById('hits').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setTimeout(() => cards.forEach(c => c.classList.remove('found')), 4000);
+      } else {
+        const url = 'https://wa.me/' + WA_ORDER + '?text=' + encodeURIComponent('Здравствуйте! Ищу: ' + q + '. Есть в наличии и какая цена?');
+        const win = window.open(url, '_blank'); if (win) { try { win.opener = null; } catch (e) { } }
+        if (typeof gtag === 'function') gtag('event', 'conversion', { send_to: 'AW-18274372715/ttJtCMCJkYIdEOuY84lE' });
+        if (!win) setTimeout(() => { window.location.href = url; }, 300);
+      }
     });
 
     /* ---------- видео объекта ---------- */
@@ -3330,21 +3937,24 @@
 
       // ВАЖНО: окно открываем синхронно, пока браузер считает это нажатием пользователя.
       // Если сделать это после await, Safari на iPhone заблокирует переход как всплывающее окно.
-      const win = window.open(url, '_blank', 'noopener,noreferrer');
+      const win = window.open(url, '_blank'); if (win) { try { win.opener = null; } catch (e) { } }
 
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({ event: 'price_request', method: 'form_and_whatsapp' });
+      // Google Ads: конверсия «Заявка с сайта»
+      if (typeof gtag === 'function') gtag('event', 'conversion', { send_to: 'AW-18274372715/RFY8CJ_E7sUcEOuY84lE' });
 
       // заявка уходит в базу уже после открытия чата — переход от неё не зависит
       saveLead({ name, phone, source: 'price_request', at: new Date().toISOString() });
 
-      if (!win) window.location.href = url;      // окно заблокировано — уходим в этой же вкладке
+      if (!win) setTimeout(() => { window.location.href = url; }, 300);  // окно заблокировано — уходим в этой же вкладке
 
       pbtn.classList.add('done'); pbtn.textContent = 'Заявка принята';
       pnote.innerHTML = 'Менеджер получил заявку. Если WhatsApp не открылся — напишите на '
         + '<a href="https://wa.me/' + WA_NUMBER + '" target="_blank" rel="noopener noreferrer"><b>+7 775 348 86 73</b></a>';
     });
   </script>
+
 
   <div class="wa-menu" id="waMenu">
     <a href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%92%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%D0%BF%D0%BE%20%D0%BE%D0%BF%D1%82%D1%83"
@@ -3386,6 +3996,26 @@
     gtag('js', new Date());
 
     gtag('config', 'AW-18274372715');
+
+    /* ---------- Google Ads: конверсии по звонкам и WhatsApp ---------- */
+    (function () {
+      var SEND = {
+        optCall: 'AW-18274372715/sPKnCLqJkYIdEOuY84lE',  // Звонок — опт (Азамат)
+        retail: 'AW-18274372715/DNBMCL2JkYIdEOuY84lE',   // Розница (Думан): звонок или WhatsApp
+        whatsapp: 'AW-18274372715/ttJtCMCJkYIdEOuY84lE'  // WhatsApp — опт (Азамат)
+      };
+      document.addEventListener('click', function (e) {
+        var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+        if (!a || a.closest('#pnote')) return;          // ссылка после заявки уже учтена как «Заявка с сайта»
+        var href = a.getAttribute('href') || '';
+        var retail = href.indexOf('77477222835') !== -1;
+        if (href.indexOf('tel:') === 0) {
+          gtag('event', 'conversion', { send_to: retail ? SEND.retail : SEND.optCall });
+        } else if (/wa\.me|whatsapp/i.test(href)) {
+          gtag('event', 'conversion', { send_to: retail ? SEND.retail : SEND.whatsapp });
+        }
+      }, true);
+    })();
   </script>
 
 </body>
