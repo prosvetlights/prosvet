@@ -2241,36 +2241,12 @@
       font-weight: 600;
       box-shadow: 0 6px 20px rgba(0, 0, 0, .28);
     }
-
-    .cart-fab.on {
-      display: flex;
-    }
-
-    .cart-fab:active {
-      transform: scale(.97);
-    }
-
-    .cart-fab svg {
-      width: 22px;
-      height: 22px;
-      fill: none;
-      stroke: #fff;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
+    .cart-fab.on { display: flex; }
+    .cart-fab:active { transform: scale(.97); }
+    .cart-fab svg { width: 22px; height: 22px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
     .cart-fab b {
-      background: #fff;
-      color: var(--blue);
-      border-radius: 10px;
-      min-width: 20px;
-      height: 20px;
-      padding: 0 6px;
-      font-size: 12px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      background: #fff; color: var(--blue); border-radius: 10px; min-width: 20px; height: 20px;
+      padding: 0 6px; font-size: 12px; display: inline-flex; align-items: center; justify-content: center;
     }
 
     /* ---------- плавающая кнопка WhatsApp ---------- */
@@ -2546,298 +2522,105 @@
 
     /* ================= КОРЗИНА ================= */
     .calc-add {
-      width: 100%;
-      margin-top: 12px;
-      padding: 12px 16px;
-      font: inherit;
-      font-size: 14.5px;
-      font-weight: 600;
-      color: #fff;
-      background: var(--blue);
-      border: 1px solid var(--blue);
-      border-radius: 6px;
-      cursor: pointer;
+      width: 100%; margin-top: 12px; padding: 12px 16px; font: inherit; font-size: 14.5px; font-weight: 600;
+      color: #fff; background: var(--blue); border: 1px solid var(--blue); border-radius: 6px; cursor: pointer;
       transition: background 150ms var(--ease), transform 130ms var(--spring);
     }
-
-    .calc-add:hover {
-      background: #1257C8;
-    }
-
-    .calc-add:active {
-      transform: scale(.98);
-    }
-
-    .calc-add.done {
-      background: var(--ink);
-      border-color: var(--ink);
-    }
-
-    .card.found {
-      border-color: var(--blue);
-      box-shadow: 0 0 0 3px var(--blue-soft);
-    }
-
+    .calc-add:hover { background: #1257C8; }
+    .calc-add:active { transform: scale(.98); }
+    .calc-add.done { background: var(--ink); border-color: var(--ink); }
+    .card.found { border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-soft); }
     .cart-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 60;
-      background: rgba(11, 14, 19, .45);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 200ms var(--ease);
+      position: fixed; inset: 0; z-index: 60; background: rgba(11, 14, 19, .45);
+      opacity: 0; pointer-events: none; transition: opacity 200ms var(--ease);
     }
-
-    .cart-overlay.on {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
+    .cart-overlay.on { opacity: 1; pointer-events: auto; }
     .cart-panel {
-      position: fixed;
-      top: 0;
+      position: fixed; top: 0; right: 0; bottom: 0; z-index: 61; width: 420px; max-width: 100%;
+      background: #fff; color: var(--ink); display: flex; flex-direction: column;
+      box-shadow: -12px 0 32px rgba(11, 14, 19, .18); transform: translateX(104%);
+      transition: transform 260ms var(--ease); visibility: hidden;
+    }
+    .cart-panel.on { transform: none; visibility: visible; }
+    .cp-head { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; border-bottom: 1px solid var(--line); }
+    .cp-head h3 { margin: 0; font-size: 18px; font-weight: 700; }
+    .cp-close { width: 36px; height: 36px; border: 1px solid var(--line); border-radius: 8px; background: #fff; cursor: pointer; font-size: 20px; line-height: 1; color: var(--ink); }
+    .cp-close:hover { border-color: var(--blue); color: var(--blue); }
+    .cp-list { flex: 1; overflow-y: auto; padding: 6px 20px; }
+    .cp-empty { padding: 34px 0; font-size: 14px; color: var(--muted); line-height: 1.6; }
+    .cp-item { display: grid; grid-template-columns: 56px 1fr; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .cp-item img { width: 56px; height: 56px; object-fit: contain; border: 1px solid var(--line); border-radius: 6px; background: #fff; }
+    .cp-name { margin: 0 0 4px; font-size: 13.5px; font-weight: 600; line-height: 1.35; }
+    .cp-price { margin: 0 0 8px; font-size: 12.5px; color: var(--muted); }
+    .cp-price b { color: var(--blue-deep); font-weight: 600; }
+    .cp-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .cp-qty { display: inline-flex; align-items: center; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+    .cp-qty button { width: 32px; height: 32px; border: 0; background: var(--paper); cursor: pointer; font-size: 17px; color: var(--ink); }
+    .cp-qty button:hover { background: var(--blue-soft); color: var(--blue); }
+    .cp-qty input { width: 62px; height: 32px; border: 0; border-left: 1px solid var(--line); border-right: 1px solid var(--line); text-align: center; font: inherit; font-size: 14px; -moz-appearance: textfield; }
+    .cp-qty input::-webkit-outer-spin-button, .cp-qty input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    .cp-sum { font-size: 14px; font-weight: 700; white-space: nowrap; }
+    .cp-del { margin-top: 6px; border: 0; background: none; padding: 0; font: inherit; font-size: 12px; color: var(--muted); cursor: pointer; }
+    .cp-del:hover { color: var(--alert); }
+    .cp-foot { padding: 16px 20px calc(18px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line); background: var(--paper); }
+    .cp-total { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+    .cp-total span { font-size: 14px; color: var(--muted); }
+    .cp-total b { font-size: 22px; }
+    .cp-note { margin: 0 0 14px; font-size: 11.5px; line-height: 1.5; color: var(--muted); }
+    .cp-order { width: 100%; padding: 14px 16px; font: inherit; font-size: 15px; font-weight: 600; color: #fff; background: #1FA855; border: 0; border-radius: 6px; cursor: pointer; transition: filter 150ms var(--ease); }
+    .cp-order:hover { filter: brightness(1.07); }
+    .cp-order:disabled { background: #B9C1CC; cursor: not-allowed; filter: none; }
+    .cp-clear { width: 100%; margin-top: 8px; padding: 8px; border: 0; background: none; font: inherit; font-size: 12.5px; color: var(--muted); cursor: pointer; }
+    .cp-clear:hover { color: var(--alert); }
+    @media (max-width:680px) { .cart-panel { width: 100%; } }
+
+    /* ---------- поиск: ничего не нашли ---------- */
+    .search { position: relative; }
+    .search-miss {
+      display: none;
+      position: absolute;
+      left: 0;
       right: 0;
-      bottom: 0;
-      z-index: 61;
-      width: 420px;
-      max-width: 100%;
+      top: calc(100% + 8px);
+      z-index: 30;
       background: #fff;
       color: var(--ink);
-      display: flex;
-      flex-direction: column;
-      box-shadow: -12px 0 32px rgba(11, 14, 19, .18);
-      transform: translateX(104%);
-      transition: transform 260ms var(--ease);
-      visibility: hidden;
-    }
-
-    .cart-panel.on {
-      transform: none;
-      visibility: visible;
-    }
-
-    .cp-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 20px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .cp-head h3 {
-      margin: 0;
-      font-size: 18px;
-      font-weight: 700;
-    }
-
-    .cp-close {
-      width: 36px;
-      height: 36px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fff;
-      cursor: pointer;
-      font-size: 20px;
-      line-height: 1;
-      color: var(--ink);
-    }
-
-    .cp-close:hover {
-      border-color: var(--blue);
-      color: var(--blue);
-    }
-
-    .cp-list {
-      flex: 1;
-      overflow-y: auto;
-      padding: 6px 20px;
-    }
-
-    .cp-empty {
-      padding: 34px 0;
+      border-radius: 10px;
+      box-shadow: 0 12px 32px rgba(11, 14, 19, .28);
+      padding: 14px 40px 14px 16px;
       font-size: 14px;
-      color: var(--muted);
-      line-height: 1.6;
+      line-height: 1.45;
     }
-
-    .cp-item {
-      display: grid;
-      grid-template-columns: 56px 1fr;
-      gap: 12px;
-      padding: 14px 0;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .cp-item img {
-      width: 56px;
-      height: 56px;
-      object-fit: contain;
-      border: 1px solid var(--line);
+    .search-miss.on { display: block; }
+    .search-miss p { margin: 0 0 10px; }
+    .search-miss .sm-acts { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+    .search-miss .sm-wa {
+      display: inline-block;
+      padding: 10px 14px;
       border-radius: 6px;
-      background: #fff;
-    }
-
-    .cp-name {
-      margin: 0 0 4px;
-      font-size: 13.5px;
-      font-weight: 600;
-      line-height: 1.35;
-    }
-
-    .cp-price {
-      margin: 0 0 8px;
-      font-size: 12.5px;
-      color: var(--muted);
-    }
-
-    .cp-price b {
-      color: var(--blue-deep);
-      font-weight: 600;
-    }
-
-    .cp-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .cp-qty {
-      display: inline-flex;
-      align-items: center;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      overflow: hidden;
-    }
-
-    .cp-qty button {
-      width: 32px;
-      height: 32px;
-      border: 0;
-      background: var(--paper);
-      cursor: pointer;
-      font-size: 17px;
-      color: var(--ink);
-    }
-
-    .cp-qty button:hover {
-      background: var(--blue-soft);
-      color: var(--blue);
-    }
-
-    .cp-qty input {
-      width: 62px;
-      height: 32px;
-      border: 0;
-      border-left: 1px solid var(--line);
-      border-right: 1px solid var(--line);
-      text-align: center;
-      font: inherit;
-      font-size: 14px;
-      -moz-appearance: textfield;
-    }
-
-    .cp-qty input::-webkit-outer-spin-button,
-    .cp-qty input::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-
-    .cp-sum {
-      font-size: 14px;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .cp-del {
-      margin-top: 6px;
-      border: 0;
-      background: none;
-      padding: 0;
-      font: inherit;
-      font-size: 12px;
-      color: var(--muted);
-      cursor: pointer;
-    }
-
-    .cp-del:hover {
-      color: var(--alert);
-    }
-
-    .cp-foot {
-      padding: 16px 20px calc(18px + env(safe-area-inset-bottom, 0px));
-      border-top: 1px solid var(--line);
-      background: var(--paper);
-    }
-
-    .cp-total {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 6px;
-    }
-
-    .cp-total span {
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    .cp-total b {
-      font-size: 22px;
-    }
-
-    .cp-note {
-      margin: 0 0 14px;
-      font-size: 11.5px;
-      line-height: 1.5;
-      color: var(--muted);
-    }
-
-    .cp-order {
-      width: 100%;
-      padding: 14px 16px;
-      font: inherit;
-      font-size: 15px;
-      font-weight: 600;
-      color: #fff;
       background: #1FA855;
-      border: 0;
-      border-radius: 6px;
-      cursor: pointer;
+      color: #fff;
+      font-weight: 600;
+      text-decoration: none;
       transition: filter 150ms var(--ease);
     }
-
-    .cp-order:hover {
-      filter: brightness(1.07);
-    }
-
-    .cp-order:disabled {
-      background: #B9C1CC;
-      cursor: not-allowed;
-      filter: none;
-    }
-
-    .cp-clear {
-      width: 100%;
-      margin-top: 8px;
-      padding: 8px;
+    .search-miss .sm-wa:hover { filter: brightness(1.07); }
+    .search-miss .sm-pdf { color: var(--blue); font-size: 13.5px; }
+    .search-miss .sm-close {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      width: 30px;
+      height: 30px;
       border: 0;
+      border-radius: 6px;
       background: none;
-      font: inherit;
-      font-size: 12.5px;
       color: var(--muted);
+      font-size: 20px;
+      line-height: 1;
       cursor: pointer;
     }
-
-    .cp-clear:hover {
-      color: var(--alert);
-    }
-
-    @media (max-width:680px) {
-      .cart-panel {
-        width: 100%;
-      }
-    }
+    .search-miss .sm-close:hover { background: var(--paper); }
   </style>
 </head>
 
@@ -2856,11 +2639,11 @@
       <form class="search" id="searchForm" onsubmit="return false">
         <input type="search" placeholder="Артикул или название — например, панель 595*595">
         <button type="submit">Найти</button>
+        <div class="search-miss" id="searchMiss" role="status" aria-live="polite"></div>
       </form>
       <div class="phones"><a href="tel:+77753488673">+7 775 348 86 73</a><small>Азамат — опт</small></div>
-      <div class="phones"><a href="tel:+77477222835">+7 747 722 28 35</a><small>Думан — розница</small></div>
-      <button class="cart" id="cartBtn" type="button" aria-controls="cartPanel" aria-expanded="false">Корзина <span
-          class="count" id="count">0</span></button>
+      <div class="phones"><a href="tel:+77029866707">+7 702 986 67 07</a><small>Зарина — розница</small></div>
+      <button class="cart" id="cartBtn" type="button" aria-controls="cartPanel" aria-expanded="false">Корзина <span class="count" id="count">0</span></button>
     </div>
   </header>
 
@@ -3048,9 +2831,7 @@
       </div>
 
       <div class="cats">
-        <a class="cat wide reveal" style="--i:0"
-          href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%C2%AB%D0%9E%D1%81%D0%B2%D0%B5%D1%89%D0%B5%D0%BD%D0%B8%D0%B5%C2%BB.%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%BF%D1%80%D0%B0%D0%B9%D1%81%20%D0%B8%20%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B5."
-          target="_blank" rel="noopener noreferrer">
+        <a class="cat wide reveal" style="--i:0" href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%C2%AB%D0%9E%D1%81%D0%B2%D0%B5%D1%89%D0%B5%D0%BD%D0%B8%D0%B5%C2%BB.%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%BF%D1%80%D0%B0%D0%B9%D1%81%20%D0%B8%20%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B5." target="_blank" rel="noopener noreferrer">
           <div class="ph cat-osv"><img src="images/cat/osveschenie.jpg" alt="Освещение" loading="lazy"><span
               class="note">фото 16:9 · освещение</span></div>
           <div class="txt">
@@ -3063,9 +2844,7 @@
             </div>
           </div>
         </a>
-        <a class="cat reveal" style="--i:1"
-          href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%C2%AB%D0%AD%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%BE%D0%BD%D0%B5%D0%BD%D1%82%D1%8B%C2%BB.%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%BF%D1%80%D0%B0%D0%B9%D1%81%20%D0%B8%20%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B5."
-          target="_blank" rel="noopener noreferrer">
+        <a class="cat reveal" style="--i:1" href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%C2%AB%D0%AD%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%BE%D0%BD%D0%B5%D0%BD%D1%82%D1%8B%C2%BB.%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%BF%D1%80%D0%B0%D0%B9%D1%81%20%D0%B8%20%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B5." target="_blank" rel="noopener noreferrer">
           <div class="ph cat-komp"><img src="images/cat/komponenty.jpg" alt="Электрические компоненты"
               loading="lazy"><span class="note">фото 16:9 · компоненты</span></div>
           <div class="txt">
@@ -3073,9 +2852,7 @@
             <p>датчики движения, фотореле, модули</p>
           </div>
         </a>
-        <a class="cat reveal" style="--i:2"
-          href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%C2%AB%D0%AD%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D0%B0%D0%BA%D1%81%D0%B5%D1%81%D1%81%D1%83%D0%B0%D1%80%D1%8B%C2%BB.%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%BF%D1%80%D0%B0%D0%B9%D1%81%20%D0%B8%20%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B5."
-          target="_blank" rel="noopener noreferrer">
+        <a class="cat reveal" style="--i:2" href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%C2%AB%D0%AD%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D0%B0%D0%BA%D1%81%D0%B5%D1%81%D1%81%D1%83%D0%B0%D1%80%D1%8B%C2%BB.%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%BF%D1%80%D0%B0%D0%B9%D1%81%20%D0%B8%20%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B5." target="_blank" rel="noopener noreferrer">
           <div class="ph cat-aks"><img src="images/cat/aksessuary.jpg" alt="Электрические аксессуары"
               loading="lazy"><span class="note">фото 16:9 · аксессуары</span></div>
           <div class="txt">
@@ -3083,9 +2860,7 @@
             <p>розетки, выключатели, патроны</p>
           </div>
         </a>
-        <a class="cat reveal" style="--i:3"
-          href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%C2%AB%D0%A0%D0%B0%D1%81%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5%20%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B9%D1%81%D1%82%D0%B2%D0%B0%C2%BB.%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%BF%D1%80%D0%B0%D0%B9%D1%81%20%D0%B8%20%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B5."
-          target="_blank" rel="noopener noreferrer">
+        <a class="cat reveal" style="--i:3" href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%C2%AB%D0%A0%D0%B0%D1%81%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5%20%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B9%D1%81%D1%82%D0%B2%D0%B0%C2%BB.%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%BF%D1%80%D0%B0%D0%B9%D1%81%20%D0%B8%20%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B5." target="_blank" rel="noopener noreferrer">
           <div class="ph cat-rasp"><img src="images/cat/raspred.jpg" alt="Распределительные устройства"
               loading="lazy"><span class="note">фото 16:9 · распредустройства</span></div>
           <div class="txt">
@@ -3093,9 +2868,7 @@
             <p>автоматические выключатели</p>
           </div>
         </a>
-        <a class="cat reveal" style="--i:4"
-          href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%C2%AB%D0%9C%D0%BE%D0%BD%D1%82%D0%B0%D0%B6%D0%BD%D1%8B%D0%B5%20%D0%B8%D0%B7%D0%B4%D0%B5%D0%BB%D0%B8%D1%8F%C2%BB.%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%BF%D1%80%D0%B0%D0%B9%D1%81%20%D0%B8%20%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B5."
-          target="_blank" rel="noopener noreferrer">
+        <a class="cat reveal" style="--i:4" href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%C2%AB%D0%9C%D0%BE%D0%BD%D1%82%D0%B0%D0%B6%D0%BD%D1%8B%D0%B5%20%D0%B8%D0%B7%D0%B4%D0%B5%D0%BB%D0%B8%D1%8F%C2%BB.%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%BF%D1%80%D0%B0%D0%B9%D1%81%20%D0%B8%20%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B5." target="_blank" rel="noopener noreferrer">
           <div class="ph cat-mont"><img src="images/cat/montazh.jpg" alt="Монтажные изделия" loading="lazy"><span
               class="note">фото 16:9 · монтажные изделия</span></div>
           <div class="txt">
@@ -3161,8 +2934,7 @@
           <h2>Монтаж и электроснабжение под ключ</h2>
         </div>
         <p style="margin:0 0 22px;font-size:14px;color:var(--muted);">Кроме поставки света делаем монтаж освещения и
-          полное электроснабжение объектов — для ЖК, больниц, школ и частных домов. Смету считает менеджер в WhatsApp.
-        </p>
+          полное электроснабжение объектов — для ЖК, больниц, школ и частных домов. Смету считает менеджер в WhatsApp.</p>
 
         <div class="grid3">
           <div class="path a reveal" style="--i:0">
@@ -3173,10 +2945,8 @@
               <li>Монтаж под ключ</li>
               <li>ШУНО — шкафы управления наружным освещением</li>
             </ul>
-            <div class="acts"><a
-                href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9D%D1%83%D0%B6%D0%B5%D0%BD%20%D1%80%D0%B0%D1%81%D1%87%D1%91%D1%82%20%D0%BC%D0%BE%D0%BD%D1%82%D0%B0%D0%B6%D0%B0%20%D0%BE%D1%81%D0%B2%D0%B5%D1%89%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%B4%D0%BB%D1%8F%20%D0%BE%D0%B1%D1%8A%D0%B5%D0%BA%D1%82%D0%B0."
-                target="_blank" rel="noopener noreferrer">Посчитать в WhatsApp</a><a class="sec"
-                href="tel:+77753488673">Позвонить</a>
+            <div class="acts"><a href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9D%D1%83%D0%B6%D0%B5%D0%BD%20%D1%80%D0%B0%D1%81%D1%87%D1%91%D1%82%20%D0%BC%D0%BE%D0%BD%D1%82%D0%B0%D0%B6%D0%B0%20%D0%BE%D1%81%D0%B2%D0%B5%D1%89%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%B4%D0%BB%D1%8F%20%D0%BE%D0%B1%D1%8A%D0%B5%D0%BA%D1%82%D0%B0." target="_blank"
+                rel="noopener noreferrer">Посчитать в WhatsApp</a><a class="sec" href="tel:+77753488673">Позвонить</a>
             </div>
           </div>
 
@@ -3188,8 +2958,7 @@
               <li>Электрощиты и ШУНО</li>
               <li>Кабель и шинопровод</li>
             </ul>
-            <div class="acts"><a
-                href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9D%D1%83%D0%B6%D0%B5%D0%BD%20%D1%80%D0%B0%D1%81%D1%87%D1%91%D1%82%20%D1%8D%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D1%81%D0%BD%D0%B0%D0%B1%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%BE%D0%B1%D1%8A%D0%B5%D0%BA%D1%82%D0%B0%20%28%D0%A2%D0%9F%2C%20%D1%89%D0%B8%D1%82%D1%8B%2C%20%D0%BA%D0%B0%D0%B1%D0%B5%D0%BB%D1%8C%29."
+            <div class="acts"><a href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9D%D1%83%D0%B6%D0%B5%D0%BD%20%D1%80%D0%B0%D1%81%D1%87%D1%91%D1%82%20%D1%8D%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D1%81%D0%BD%D0%B0%D0%B1%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%BE%D0%B1%D1%8A%D0%B5%D0%BA%D1%82%D0%B0%20%28%D0%A2%D0%9F%2C%20%D1%89%D0%B8%D1%82%D1%8B%2C%20%D0%BA%D0%B0%D0%B1%D0%B5%D0%BB%D1%8C%29."
                 target="_blank" rel="noopener noreferrer">Посчитать в WhatsApp</a><a class="sec"
                 href="tel:+77753488673">Позвонить</a></div>
           </div>
@@ -3202,24 +2971,20 @@
               <li>Проект освещения</li>
               <li>Для ЖК, школ, больниц и частных домов</li>
             </ul>
-            <div class="acts"><a
-                href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9D%D1%83%D0%B6%D0%B5%D0%BD%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D1%8D%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D1%81%D0%BD%D0%B0%D0%B1%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F/%D0%BE%D1%81%D0%B2%D0%B5%D1%89%D0%B5%D0%BD%D0%B8%D1%8F."
-                target="_blank" rel="noopener noreferrer">Обсудить в WhatsApp</a></div>
+            <div class="acts"><a href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9D%D1%83%D0%B6%D0%B5%D0%BD%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D1%8D%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D1%81%D0%BD%D0%B0%D0%B1%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F/%D0%BE%D1%81%D0%B2%D0%B5%D1%89%D0%B5%D0%BD%D0%B8%D1%8F." target="_blank"
+                rel="noopener noreferrer">Обсудить в WhatsApp</a></div>
           </div>
 
           <div class="path c reveal" style="--i:3">
             <h3>Как посчитать ваш объект</h3>
-            <p>Напишите менеджеру в WhatsApp: что за объект, где он находится и что нужно сделать. Менеджер уточнит
-              детали
+            <p>Напишите менеджеру в WhatsApp: что за объект, где он находится и что нужно сделать. Менеджер уточнит детали
               и пришлёт смету.</p>
             <ul>
               <li>Пн–Пт 08:00–17:00</li>
               <li>Азамат, +7 775 348 86 73</li>
             </ul>
-            <div class="acts"><a
-                href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9D%D1%83%D0%B6%D0%BD%D0%B0%20%D1%81%D0%BC%D0%B5%D1%82%D0%B0%20%D0%BD%D0%B0%20%D0%BE%D0%B1%D1%8A%D0%B5%D0%BA%D1%82."
-                target="_blank" rel="noopener noreferrer">Написать в WhatsApp</a><a class="sec"
-                href="tel:+77753488673">Позвонить</a>
+            <div class="acts"><a href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9D%D1%83%D0%B6%D0%BD%D0%B0%20%D1%81%D0%BC%D0%B5%D1%82%D0%B0%20%D0%BD%D0%B0%20%D0%BE%D0%B1%D1%8A%D0%B5%D0%BA%D1%82." target="_blank"
+                rel="noopener noreferrer">Написать в WhatsApp</a><a class="sec" href="tel:+77753488673">Позвонить</a>
             </div>
           </div>
         </div>
@@ -3231,8 +2996,7 @@
   <section id="objects" style="padding-top:0;">
     <div class="wrap">
       <div class="sec-head">
-        <h2>Наши объекты</h2><a href="https://www.instagram.com/prosvet_lights/" target="_blank"
-          rel="noopener noreferrer">Все объекты в Instagram</a>
+        <h2>Наши объекты</h2><a href="https://www.instagram.com/prosvet_lights/" target="_blank" rel="noopener noreferrer">Все объекты в Instagram</a>
       </div>
       <div class="objects">
         <article class="obj featured reveal" style="--i:0">
@@ -3351,21 +3115,11 @@
         <div>
           <h4>Каталог</h4>
           <ul>
-            <li><a
-                href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%C2%AB%D0%9E%D1%81%D0%B2%D0%B5%D1%89%D0%B5%D0%BD%D0%B8%D0%B5%C2%BB.%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%BF%D1%80%D0%B0%D0%B9%D1%81%20%D0%B8%20%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B5."
-                target="_blank" rel="noopener noreferrer">Освещение</a></li>
-            <li><a
-                href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%C2%AB%D0%AD%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%BE%D0%BD%D0%B5%D0%BD%D1%82%D1%8B%C2%BB.%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%BF%D1%80%D0%B0%D0%B9%D1%81%20%D0%B8%20%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B5."
-                target="_blank" rel="noopener noreferrer">Электрические компоненты</a></li>
-            <li><a
-                href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%C2%AB%D0%AD%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D0%B0%D0%BA%D1%81%D0%B5%D1%81%D1%81%D1%83%D0%B0%D1%80%D1%8B%C2%BB.%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%BF%D1%80%D0%B0%D0%B9%D1%81%20%D0%B8%20%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B5."
-                target="_blank" rel="noopener noreferrer">Электрические аксессуары</a></li>
-            <li><a
-                href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%C2%AB%D0%A0%D0%B0%D1%81%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5%20%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B9%D1%81%D1%82%D0%B2%D0%B0%C2%BB.%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%BF%D1%80%D0%B0%D0%B9%D1%81%20%D0%B8%20%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B5."
-                target="_blank" rel="noopener noreferrer">Распределительные устройства</a></li>
-            <li><a
-                href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%C2%AB%D0%9C%D0%BE%D0%BD%D1%82%D0%B0%D0%B6%D0%BD%D1%8B%D0%B5%20%D0%B8%D0%B7%D0%B4%D0%B5%D0%BB%D0%B8%D1%8F%C2%BB.%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%BF%D1%80%D0%B0%D0%B9%D1%81%20%D0%B8%20%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B5."
-                target="_blank" rel="noopener noreferrer">Монтажные изделия</a></li>
+            <li><a href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%C2%AB%D0%9E%D1%81%D0%B2%D0%B5%D1%89%D0%B5%D0%BD%D0%B8%D0%B5%C2%BB.%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%BF%D1%80%D0%B0%D0%B9%D1%81%20%D0%B8%20%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B5." target="_blank" rel="noopener noreferrer">Освещение</a></li>
+            <li><a href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%C2%AB%D0%AD%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%BE%D0%BD%D0%B5%D0%BD%D1%82%D1%8B%C2%BB.%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%BF%D1%80%D0%B0%D0%B9%D1%81%20%D0%B8%20%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B5." target="_blank" rel="noopener noreferrer">Электрические компоненты</a></li>
+            <li><a href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%C2%AB%D0%AD%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D0%B0%D0%BA%D1%81%D0%B5%D1%81%D1%81%D1%83%D0%B0%D1%80%D1%8B%C2%BB.%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%BF%D1%80%D0%B0%D0%B9%D1%81%20%D0%B8%20%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B5." target="_blank" rel="noopener noreferrer">Электрические аксессуары</a></li>
+            <li><a href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%C2%AB%D0%A0%D0%B0%D1%81%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5%20%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B9%D1%81%D1%82%D0%B2%D0%B0%C2%BB.%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%BF%D1%80%D0%B0%D0%B9%D1%81%20%D0%B8%20%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B5." target="_blank" rel="noopener noreferrer">Распределительные устройства</a></li>
+            <li><a href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%80%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%20%C2%AB%D0%9C%D0%BE%D0%BD%D1%82%D0%B0%D0%B6%D0%BD%D1%8B%D0%B5%20%D0%B8%D0%B7%D0%B4%D0%B5%D0%BB%D0%B8%D1%8F%C2%BB.%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%BF%D1%80%D0%B0%D0%B9%D1%81%20%D0%B8%20%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B5." target="_blank" rel="noopener noreferrer">Монтажные изделия</a></li>
           </ul>
         </div>
         <div>
@@ -3373,14 +3127,9 @@
           <ul>
             <li><a href="#about">О компании</a></li>
             <li><a href="#order">Доставка и оплата</a></li>
-            <li><a
-                href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%92%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%D0%BF%D0%BE%20%D0%B3%D0%B0%D1%80%D0%B0%D0%BD%D1%82%D0%B8%D0%B8%20%D0%BD%D0%B0%20%D1%82%D0%BE%D0%B2%D0%B0%D1%80."
-                target="_blank" rel="noopener noreferrer">Гарантия до 6 лет</a></li>
-            <li><a
-                href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D1%80%D0%B5%D0%BA%D0%B2%D0%B8%D0%B7%D0%B8%D1%82%D1%8B%20%D0%B8%20%D1%81%D1%87%D1%91%D1%82%20%D0%B4%D0%BB%D1%8F%20%D1%8E%D1%80%D0%BB%D0%B8%D1%86%D0%B0."
-                target="_blank" rel="noopener noreferrer">Реквизиты для юрлиц</a></li>
-            <li><a href="https://www.instagram.com/prosvet_lights/" target="_blank"
-                rel="noopener noreferrer">Instagram</a></li>
+            <li><a href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%92%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%D0%BF%D0%BE%20%D0%B3%D0%B0%D1%80%D0%B0%D0%BD%D1%82%D0%B8%D0%B8%20%D0%BD%D0%B0%20%D1%82%D0%BE%D0%B2%D0%B0%D1%80." target="_blank" rel="noopener noreferrer">Гарантия до 6 лет</a></li>
+            <li><a href="https://wa.me/77753488673?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%9F%D1%80%D0%B8%D1%88%D0%BB%D0%B8%D1%82%D0%B5%2C%20%D0%BF%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D1%80%D0%B5%D0%BA%D0%B2%D0%B8%D0%B7%D0%B8%D1%82%D1%8B%20%D0%B8%20%D1%81%D1%87%D1%91%D1%82%20%D0%B4%D0%BB%D1%8F%20%D1%8E%D1%80%D0%BB%D0%B8%D1%86%D0%B0." target="_blank" rel="noopener noreferrer">Реквизиты для юрлиц</a></li>
+            <li><a href="https://www.instagram.com/prosvet_lights/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
           </ul>
         </div>
         <div>
@@ -3392,8 +3141,8 @@
               <a href="https://wa.me/77753488673" target="_blank" rel="noopener noreferrer"
                 class="wa-inline">WhatsApp</a>
             </li>
-            <li><a href="tel:+77477222835">+7 747 722 28 35</a> — Думан, розница
-              <a href="https://wa.me/77477222835" target="_blank" rel="noopener noreferrer"
+            <li><a href="tel:+77029866707">+7 702 986 67 07</a> — Зарина, розница
+              <a href="https://wa.me/77029866707" target="_blank" rel="noopener noreferrer"
                 class="wa-inline">WhatsApp</a>
             </li>
             <li>Пн–Пт 08:00–17:00, сб–вс выходной</li>
@@ -3409,12 +3158,7 @@
     </div>
   </footer>
 
-  <button class="cart-fab" id="cartFab" type="button" aria-label="Открыть корзину"><svg viewBox="0 0 24 24"
-      aria-hidden="true">
-      <path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L20 8H6.2" />
-      <circle cx="9" cy="20" r="1.3" />
-      <circle cx="17" cy="20" r="1.3" />
-    </svg>Корзина <b id="cartFabCount">0</b></button>
+  <button class="cart-fab" id="cartFab" type="button" aria-label="Открыть корзину"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L20 8H6.2"/><circle cx="9" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg>Корзина <b id="cartFabCount">0</b></button>
   <div class="cart-overlay" id="cartOverlay"></div>
   <aside class="cart-panel" id="cartPanel" role="dialog" aria-modal="true" aria-label="Корзина" aria-hidden="true">
     <div class="cp-head">
@@ -3432,6 +3176,52 @@
   </aside>
 
   <script>
+    /* ---------- WhatsApp: метка «с сайта» ---------- */
+    /* В конце каждого сообщения с сайта клиент отправляет метку:
+       «(с сайта)»          — человек пришёл на сайт сам;
+       «(с сайта · Google)» — человек пришёл по рекламе Google (за последние 30 дней).
+       По этой метке менеджеры считают, сколько реальных обращений дал сайт и реклама. */
+    const FROM_GOOGLE_ADS = (function () {
+      const KEY = 'prosvet_ads', DAYS_30 = 30 * 24 * 60 * 60 * 1000;
+      let ts = 0;
+      try {
+        const q = new URLSearchParams(location.search);
+        if (q.has('gclid') || q.has('gbraid') || q.has('wbraid') || q.has('gad_source')) {
+          ts = Date.now();
+          localStorage.setItem(KEY, String(ts));
+        } else {
+          ts = +localStorage.getItem(KEY) || 0;
+        }
+      } catch (e) { }
+      return ts > 0 && Date.now() - ts < DAYS_30;
+    })();
+    const WA_MARK = FROM_GOOGLE_ADS ? '(с сайта · Google)' : '(с сайта)';
+
+    function waText(text) {
+      text = String(text || '').trim() || 'Здравствуйте!';
+      return text.indexOf('(с сайта') === -1 ? text + '\n' + WA_MARK : text;
+    }
+    function waUrl(phone, text) {
+      return 'https://wa.me/' + phone + '?text=' + encodeURIComponent(waText(text));
+    }
+    function tagWaLink(a) {
+      const href = a.getAttribute('href') || '';
+      const m = href.match(/^https?:\/\/(?:api\.)?wa\.me\/(\d+)\/?(?:\?(.*))?$/i);
+      if (!m) return;
+      let text = '';
+      try { text = new URLSearchParams(m[2] || '').get('text') || ''; } catch (e) { }
+      const tagged = waUrl(m[1], text);
+      if (tagged !== href) a.setAttribute('href', tagged);
+    }
+    function tagAllWaLinks() { document.querySelectorAll('a[href*="wa.me"]').forEach(tagWaLink); }
+    tagAllWaLinks();
+    document.addEventListener('DOMContentLoaded', tagAllWaLinks);
+    // ссылки, появившиеся позже, получают метку в момент нажатия
+    document.addEventListener('click', (e) => {
+      const a = e.target && e.target.closest ? e.target.closest('a[href*="wa.me"]') : null;
+      if (a) tagWaLink(a);
+    }, true);
+
     /* ---------- видео о компании ---------- */
     (function promoVideoInit() {
       const box = document.getElementById('aboutVideo');
@@ -3794,7 +3584,7 @@
       });
       const text = 'Здравствуйте! Хочу оформить заказ с сайта:\n' + lines.join('\n')
         + '\nИтого: ' + fmt(cartTotals()) + ' ₸\nПодтвердите, пожалуйста, наличие и сумму.';
-      const url = 'https://wa.me/' + WA_ORDER + '?text=' + encodeURIComponent(text);
+      const url = waUrl(WA_ORDER, text);
       const win = window.open(url, '_blank'); if (win) { try { win.opener = null; } catch (e) { } }
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({ event: 'cart_order', items: keys.length, value: cartTotals() });
@@ -3815,17 +3605,58 @@
         return words.every(w => hay.includes(w));
       });
       if (hits.length) {
+        hideSearchMiss();
         cards.forEach(c => c.classList.remove('found'));
         hits.forEach(({ i }) => cards[i] && cards[i].classList.add('found'));
         document.getElementById('hits').scrollIntoView({ behavior: 'smooth', block: 'start' });
         setTimeout(() => cards.forEach(c => c.classList.remove('found')), 4000);
       } else {
-        const url = 'https://wa.me/' + WA_ORDER + '?text=' + encodeURIComponent('Здравствуйте! Ищу: ' + q + '. Есть в наличии и какая цена?');
-        const win = window.open(url, '_blank'); if (win) { try { win.opener = null; } catch (e) { } }
-        if (typeof gtag === 'function') gtag('event', 'conversion', { send_to: 'AW-18274372715/ttJtCMCJkYIdEOuY84lE' });
-        if (!win) setTimeout(() => { window.location.href = url; }, 300);
+        // Ничего не нашли — предлагаем спросить менеджера. WhatsApp откроется и заявка
+        // засчитается в Google Ads только если человек сам нажмёт кнопку.
+        showSearchMiss(q);
       }
     });
+
+    const searchMiss = document.getElementById('searchMiss');
+    const searchInput = document.querySelector('#searchForm input');
+    function hideSearchMiss() { searchMiss.classList.remove('on'); }
+    function showSearchMiss(q) {
+      searchMiss.textContent = '';
+      const p = document.createElement('p');
+      const b = document.createElement('b');
+      b.textContent = '«' + q + '»';
+      p.append('Не нашли ', b, ' среди популярных товаров. На складе 620 позиций — менеджер проверит наличие и цену.');
+
+      const acts = document.createElement('div');
+      acts.className = 'sm-acts';
+      const wa = document.createElement('a');
+      wa.className = 'sm-wa';
+      wa.target = '_blank';
+      wa.rel = 'noopener noreferrer';
+      wa.href = waUrl(WA_ORDER, 'Здравствуйте! Ищу: ' + q + '. Есть в наличии и какая цена?');
+      wa.textContent = 'Спросить в WhatsApp';
+      wa.addEventListener('click', () => setTimeout(hideSearchMiss, 300));
+      const pdf = document.createElement('a');
+      pdf.className = 'sm-pdf';
+      pdf.href = 'PROSVET_katalog.pdf';
+      pdf.target = '_blank';
+      pdf.rel = 'noopener';
+      pdf.textContent = 'Весь каталог (PDF)';
+      acts.append(wa, pdf);
+
+      const close = document.createElement('button');
+      close.type = 'button';
+      close.className = 'sm-close';
+      close.setAttribute('aria-label', 'Закрыть');
+      close.textContent = '×';
+      close.addEventListener('click', hideSearchMiss);
+
+      searchMiss.append(p, acts, close);
+      searchMiss.classList.add('on');
+    }
+    searchInput.addEventListener('input', hideSearchMiss);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hideSearchMiss(); });
+    document.addEventListener('click', (e) => { if (e.target.closest && !e.target.closest('#searchForm')) hideSearchMiss(); });
 
     /* ---------- видео объекта ---------- */
     const vidBox = document.getElementById('arenaVid');
@@ -3922,36 +3753,41 @@
     const pname = document.getElementById('pname'), pphone = document.getElementById('pphone');
     const pnote = document.getElementById('pnote');
 
-    async function saveLead(lead) {
-      console.log('Заявка в базу:', lead);   // на боевом сайте — запись в Supabase
-      return true;
-    }
+    let priceSent = false;   // повторное нажатие не считаем новой заявкой
+
+    // Заявка уходит менеджеру только через WhatsApp: форма открывает чат с готовым текстом,
+    // клиенту остаётся нажать «отправить».
     pform.addEventListener('submit', () => {
       const name = pname.value.trim(), phone = pphone.value.trim();
-      if (phone.length < 6) { pphone.focus(); return; }
+      const digits = phone.replace(/\D/g, '');
+      if (digits.length < 10 || digits.length > 12) {
+        pphone.focus();
+        pnote.textContent = 'Проверьте номер телефона — нужно 10–11 цифр, например +7 777 123 45 67.';
+        return;
+      }
 
       const text = 'Здравствуйте! Пришлите, пожалуйста, актуальный прайс PROSVET.'
         + (name ? ' Меня зовут ' + name + '.' : '')
-        + (phone ? ' Мой номер: ' + phone : '');
-      const url = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(text);
+        + ' Мой номер: ' + phone;
+      const url = waUrl(WA_NUMBER, text);
 
       // ВАЖНО: окно открываем синхронно, пока браузер считает это нажатием пользователя.
-      // Если сделать это после await, Safari на iPhone заблокирует переход как всплывающее окно.
+      // Иначе Safari на iPhone заблокирует переход как всплывающее окно.
       const win = window.open(url, '_blank'); if (win) { try { win.opener = null; } catch (e) { } }
 
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: 'price_request', method: 'form_and_whatsapp' });
-      // Google Ads: конверсия «Заявка с сайта»
-      if (typeof gtag === 'function') gtag('event', 'conversion', { send_to: 'AW-18274372715/RFY8CJ_E7sUcEOuY84lE' });
-
-      // заявка уходит в базу уже после открытия чата — переход от неё не зависит
-      saveLead({ name, phone, source: 'price_request', at: new Date().toISOString() });
+      if (!priceSent) {
+        priceSent = true;
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: 'price_request', method: 'whatsapp' });
+        // Google Ads: конверсия «Заявка с сайта»
+        if (typeof gtag === 'function') gtag('event', 'conversion', { send_to: 'AW-18274372715/RFY8CJ_E7sUcEOuY84lE' });
+      }
 
       if (!win) setTimeout(() => { window.location.href = url; }, 300);  // окно заблокировано — уходим в этой же вкладке
 
-      pbtn.classList.add('done'); pbtn.textContent = 'Заявка принята';
-      pnote.innerHTML = 'Менеджер получил заявку. Если WhatsApp не открылся — напишите на '
-        + '<a href="https://wa.me/' + WA_NUMBER + '" target="_blank" rel="noopener noreferrer"><b>+7 775 348 86 73</b></a>';
+      pbtn.classList.add('done'); pbtn.textContent = 'Открыли WhatsApp';
+      pnote.innerHTML = 'Нажмите «отправить» в WhatsApp — менеджер пришлёт прайс. Если чат не открылся, напишите на '
+        + '<a href="' + waUrl(WA_NUMBER, text) + '" target="_blank" rel="noopener noreferrer"><b>+7 775 348 86 73</b></a>';
     });
   </script>
 
@@ -3961,9 +3797,9 @@
       target="_blank" rel="noopener noreferrer">
       <b>Азамат — опт</b><span>+7 775 348 86 73</span>
     </a>
-    <a href="https://wa.me/77477222835?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%92%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%D0%BF%D0%BE%20%D1%80%D0%BE%D0%B7%D0%BD%D0%B8%D1%86%D0%B5"
+    <a href="https://wa.me/77029866707?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%92%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%D0%BF%D0%BE%20%D1%80%D0%BE%D0%B7%D0%BD%D0%B8%D1%86%D0%B5"
       target="_blank" rel="noopener noreferrer">
-      <b>Думан — розница</b><span>+7 747 722 28 35</span>
+      <b>Зарина — розница</b><span>+7 702 986 67 07</span>
     </a>
   </div>
   <button class="wa-fab" id="waFab" aria-label="Написать в WhatsApp">
@@ -3998,18 +3834,28 @@
     gtag('config', 'AW-18274372715');
 
     /* ---------- Google Ads: конверсии по звонкам и WhatsApp ---------- */
+    /* Считается только действие самого человека: нажал на номер (с телефона) или на кнопку WhatsApp. */
     (function () {
       var SEND = {
         optCall: 'AW-18274372715/sPKnCLqJkYIdEOuY84lE',  // Звонок — опт (Азамат)
-        retail: 'AW-18274372715/DNBMCL2JkYIdEOuY84lE',   // Розница (Думан): звонок или WhatsApp
+        retail: 'AW-18274372715/DNBMCL2JkYIdEOuY84lE',   // Розница (Зарина): звонок или WhatsApp
         whatsapp: 'AW-18274372715/ttJtCMCJkYIdEOuY84lE'  // WhatsApp — опт (Азамат)
       };
+      var RETAIL_PHONES = ['77029866707'];               // Зарина — розница
+      // с компьютера по номеру не позвонить, поэтому такой клик заявкой не считаем
+      var CAN_CALL = /Android|iPhone|iPod|Mobile|Windows Phone/i.test(navigator.userAgent);
+
+      function phoneOf(href) {
+        var m = href.match(/^tel:([+\d\s()\-]+)/i) || href.match(/wa\.me\/(\d+)/i) || href.match(/[?&]phone=(\d+)/i);
+        return m ? m[1].replace(/\D/g, '') : '';
+      }
       document.addEventListener('click', function (e) {
         var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
         if (!a || a.closest('#pnote')) return;          // ссылка после заявки уже учтена как «Заявка с сайта»
         var href = a.getAttribute('href') || '';
-        var retail = href.indexOf('77477222835') !== -1;
-        if (href.indexOf('tel:') === 0) {
+        var retail = RETAIL_PHONES.indexOf(phoneOf(href)) !== -1;
+        if (/^tel:/i.test(href)) {
+          if (!CAN_CALL) return;
           gtag('event', 'conversion', { send_to: retail ? SEND.retail : SEND.optCall });
         } else if (/wa\.me|whatsapp/i.test(href)) {
           gtag('event', 'conversion', { send_to: retail ? SEND.retail : SEND.whatsapp });
